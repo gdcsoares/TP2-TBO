@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wno-unused-result -g
 
-SRCS =main.c source/graph/graph.c source/node/node.c  priority_queue/PQ.c 
+SRCS =main.c  source/graph/graph.c source/node/node.c  priority_queue/PQ.c source/algorythm/algorythm.c source/rtt/rtt.c
 OBJS = $(SRCS:.c=.o)
 
 all: trab2

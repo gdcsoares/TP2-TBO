@@ -46,7 +46,9 @@ int main(int agrc, char *argv[]){
         float z;
         fscanf(file, "%d %d %f", &x, &y, &z);
         node_insert(graph, x, y, z);
-    }
+    }  
+
+    int n_rtts = S*C;
 
     graph_print(graph);
 

@@ -52,3 +52,11 @@ void graph_destroy(Graph * graph){
     free(graph->adjLists);
     free(graph);
 }
+
+int return_vertices(Graph * graph){
+    return graph->V;
+}
+
+Node ** return_adjLists(Graph * graph){
+    return graph->adjLists;
+}

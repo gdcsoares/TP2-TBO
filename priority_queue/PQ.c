@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "PQ.h"
 
-
 struct pq{
     Item *queue;
     int *map;
@@ -46,19 +45,22 @@ PQ * PQ_init(int maxN) {
     return pq;
 }
 
-void PQ_insert(Item v, PQ * pq) {
+void PQ_insert(int id, double value, PQ * pq) {
     pq->N++;
+    Item v;
+    v.id = id;
+    v.value = value;
     pq->queue[pq->N] = v;
     pq->map[id(v)] = pq->N;
     fix_up(pq, pq->N);
 }
 
-Item PQ_delmin(PQ * pq) {
+int PQ_delmin(PQ * pq) {
     Item min = pq->queue[1];
     swap(1, pq->N,pq);
     pq->N--;
     fix_down(pq, 1);
-    return min;
+    return min.id;
 }
 
 Item PQ_min(PQ * pq) {
