@@ -36,7 +36,7 @@ void fix_down(PQ * pq, int k){
 }
 
 PQ * PQ_init(int maxN) {
-    PQ * pq = (PQ*)calloc(1,sizeof(pq));
+    PQ * pq = (PQ*)calloc(1,sizeof(PQ));
 
     pq->queue = (Item *) malloc((maxN+1) * sizeof (Item));
     pq->map = (int *) malloc((maxN+1) * sizeof (int));
@@ -67,7 +67,7 @@ Item PQ_min(PQ * pq) {
     return pq->queue[1];
 }
 
-void PQ_decrease_key(int id, double value,PQ * pq) {
+void PQ_decrease_key(int id, double value, PQ * pq) {
     int i = pq->map[id];
     value(pq->queue[i]) = value;
     fix_up(pq, i);
@@ -84,6 +84,6 @@ int  PQ_size(PQ * pq) {
 void PQ_finish(PQ * pq) {
     free(pq->queue);
     free(pq->map);
+    free(pq);
 }
-
 

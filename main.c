@@ -1,60 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "source/algorythm/algorythm.h"
 #include "source/graph/graph.h"
 #include "source/node/node.h"
+#include "source/rtt/rtt.h"
+#include "source/distances/distances.h"
+#include "utils/utils.h"
 
 int main(int agrc, char *argv[]){
-    // Abre o arquivo para leitura
-    FILE *file = fopen(argv[1], "r");
 
-    // Verifica se o arquivo foi aberto corretamente
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
-    }
+    int V, E, S, C, M;
+    int *servers, *clients, *monitors;
 
-    int V, E;
-    fscanf(file, "%d %d", &V, &E);
+    // Lê os dados do arquivo
+    Graph* graph = read_input_file(argv[1], &V, &E, &servers, &S, &clients, &C, &monitors, &M);
 
-    int S, C, M;
-    fscanf(file, "%d %d %d", &S, &C, &M);
-    
-    int servers[S];
-    int clients[C];
-    int monitors[M];
-
-    // Lê os servidores
-    for (int i = 0; i < S; i++) {
-        fscanf(file, "%d", &servers[i]);
-    }
-
-    // Lê os clientes
-    for (int i = 0; i < C; i++) {
-        fscanf(file, "%d", &clients[i]);
-    }
-
-    // Lê os monitores
-    for (int i = 0; i < M; i++) {
-        fscanf(file, "%d", &monitors[i]);
-    }
-
-    Graph* graph = graph_create(V, E);
-
-    // Lê as arestas
-    for (int i = 0; i < E; i++){
-        int x, y;
-        float z;
-        fscanf(file, "%d %d %f", &x, &y, &z);
-        node_insert(graph, x, y, z);
-    }  
+    //graph_print(graph);
 
     int n_rtts = S*C;
 
-    graph_print(graph);
+    RTT ** rtts = (RTT**)malloc(n_rtts * sizeof(RTT*));
+
+    int important_nodes = S+C+M;
+
+    Distances ** important_dists = (Distances**)malloc(important_nodes * sizeof(Distances*));
+
+    distances_calculate(important_dists, important_nodes, graph, servers, clients,monitors, S, C, M);
+
+    rtt_calculate(important_dists,rtts, servers, clients,monitors, S, C, M);
+
+    qsort(rtts, n_rtts, sizeof(RTT*), compare_rtt);
+    
+    print_rtts(rtts, n_rtts, argv[2]);
 
     graph_destroy(graph);
 
-    fclose(file);
+    for(int i = 0;i< n_rtts; i++){
+        rtt_destroy(rtts[i]);
+    }
+
+    for(int i=0; i<important_nodes;i++){
+        dist_destroy(important_dists[i]);
+    }
+
+    free(servers);
+    free(clients);
+    free(monitors);
+    free(important_dists);
+    free(rtts);
 
     return 0;
 }

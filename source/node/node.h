@@ -3,11 +3,11 @@
 
 typedef struct node Node;
 
-Node* node_create(int vertex, float distance, Node* next);
+Node* node_create(int vertex, double distance, Node* next);
 
 int return_vertex(Node * node);
 
-float return_distance(Node * node);
+double return_distance(Node * node);
 
 Node* return_next(Node * node);
 

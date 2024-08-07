@@ -15,12 +15,12 @@ int main() {
     PQ * pq = PQ_init(10);
 
     // inserindo alguns elementos na PQ
-    PQ_insert(make_item(1, 10.0),pq);
-    PQ_insert(make_item(6, 5.0),pq);
-    PQ_insert(make_item(3, 3.0),pq);
-    PQ_insert(make_item(4, 4.0),pq);
-    PQ_insert(make_item(7, 7.0),pq);
-    PQ_insert(make_item(2, 1.0),pq);
+    PQ_insert(1,10.0,pq);
+    PQ_insert(6, 5.0,pq);
+    PQ_insert(3, 3.0,pq);
+    PQ_insert(4, 4.0,pq);
+    PQ_insert(7, 7.0,pq);
+    PQ_insert(2, 1.0,pq);
 
     // alterando a prioridade de alguns elementos
     PQ_decrease_key(4, 0.5,pq); // agora o nó 4 tem valor 0.5, sua posição no heap deve mudar

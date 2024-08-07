@@ -1,5 +1,4 @@
 #include "graph.h"
-#include "../node/node.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,7 +23,7 @@ Graph* graph_create(int V, int E){
     return graph;
 }
 
-void node_insert(Graph * g, int a, int b, float distance){
+void node_insert(Graph * g, int a, int b, double distance){
     g->adjLists[a] = node_create(b, distance, g->adjLists[a]);
 }
 

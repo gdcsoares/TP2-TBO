@@ -5,11 +5,11 @@
 // Estrutura de dados para armazenar uma Aresta
 struct node {
    int vertex;  // Vértice Destino da Aresta
-   float distance;  // Peso da Aresta 
+   double distance;  // Peso da Aresta 
    struct node* next;  // Próximo nó(aresta) na lista de adjacência
 };
 
-Node* node_create(int vertex, float distance, Node* next){
+Node* node_create(int vertex, double distance, Node* next){
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->vertex = vertex;
     newNode->distance = distance;
@@ -21,7 +21,7 @@ int return_vertex(Node * node){
    return node->vertex;
 }
 
-float return_distance(Node * node){
+double return_distance(Node * node){
    return node->distance;
 }
 
@@ -30,5 +30,5 @@ Node * return_next(Node * node){
 }
 
 void node_destroy(Node * node){
-    free(node);
+   free(node);
 }
