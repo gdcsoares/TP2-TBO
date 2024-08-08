@@ -5,7 +5,7 @@
 #include "../rtt/rtt.h"
 #include <limits.h>
 
-#define INFINITY (1.0 / 0.0) 
+#define INFINITY INT_MAX/2
 
 void dijkstra_solve(Graph *G, int source, double* dist){
     // Inicializa a fila de prioridade
